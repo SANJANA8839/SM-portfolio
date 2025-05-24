@@ -1,6 +1,6 @@
 import React from "react";
-import { FaCss3, FaFigma, FaHtml5, FaJs, FaReact } from "react-icons/fa";
-import { SiRedis } from "react-icons/si";
+import { FaCss3, FaFigma, FaHtml5, FaJava, FaJs, FaReact } from "react-icons/fa";
+import { SiCplusplus, SiRedis, SiTailwindcss } from "react-icons/si";
 import { FaGoogle } from "react-icons/fa";
 import { SiMongodb } from "react-icons/si";
 import { RiNetflixFill } from "react-icons/ri";
@@ -24,32 +24,53 @@ const Experience = () => {
             <FaJs color="#F7DF1E" size={50} />
           </span>
           <span className="p-3 bg-zinc-950 flex items-center rounded-2xl">
-            <FaFigma color="#F24E1E" size={50} />
+            <SiTailwindcss color="#F24E1E" size={50} />
           </span>
           <span className="p-3 bg-zinc-950 flex items-center rounded-2xl">
             <SiMongodb color="#47A248" size={50} />
           </span>
           <span className="p-3 bg-zinc-950 flex items-center rounded-2xl">
-            <SiRedis color="#FF4438" size={50} />
+            <FaJava color="#FF4438" size={50} />
+          </span>
+          <span className="p-3 bg-zinc-950 flex items-center rounded-2xl">
+            <SiCplusplus color="#FF4438" size={50} />
           </span>
         </div>
         <div>
           <div className="flex gap-10 bg-slate-950 bg-opacity-45 mt-4 rounded-lg p-4 items-center">
-            <FaGoogle color="#4285F4" size={50} />
+            {/* <FaGoogle color="#4285F4" size={50} /> */}
             <span className="text-white">
-              <h2 className="leading-tight">Software Engineer , Google</h2>
+              <h2 className="leading-tight">Intern,  Docxito</h2>
               <p className="text-sm leading-tight font-thin">
-                Sept 2023 - Present
+                february 2025 - April 2025
               </p>
               <ul className="text-sm p-2">
-                <li>- Work as software developer</li>
-                <li>- Senior SDE-developer</li>
+                <li>- Front-end Developer </li>
+                <li>- Contributed to a real-time medical services app using React.js and React Native. <br></br>
+                 - Developed responsive UI components and implemented features based on Figma designs.<br></br>
+               - Integrated REST APIs for fetching and displaying real-time data.<br></br>
+                - Collaborated with backend and design teams in an agile environment using JIRA.</li>
               </ul>
             </span>
           </div>
           <div className="flex gap-10 bg-slate-950 bg-opacity-45 mt-4 rounded-lg  p-4 items-center">
-            <RiNetflixFill color="#E50914" size={50} />
+            {/* <RiNetflixFill color="#E50914" size={50} /> */}
             <span className="text-white">
+              <h2 className="leading-tight">Intern,  Samrat Ashok Technological Institute Vidisha</h2>
+              <p className="text-sm leading-tight font-thin">
+                May 2023
+              </p>
+              <ul className="text-sm p-2">
+                <li>- College level internship</li>
+                <li>- Gained hands-on exposure to emerging technologies including AI/ML,Data Science, and Cloud Computing. <br></br>
+                  - Worked under faculty mentorship to explore real-world applications of modern IT trends.<br></br>
+                - Strengthened foundational knowledge and technical skills through practical sessions andworkshops.</li>
+              </ul>
+            </span>
+          </div>
+          {/* <div className="flex gap-10 bg-slate-950 bg-opacity-45 mt-4 rounded-lg  p-4 items-center">
+            {/* <FaAmazon color="#FF9900" size={50} /> */}
+            {/* <span className="text-white">
               <h2 className="leading-tight">Software Engineer, Google</h2>
               <p className="text-sm leading-tight font-thin">
                 Sept 2023 - Present
@@ -58,21 +79,8 @@ const Experience = () => {
                 <li>- Work as software developer.</li>
                 <li>- Senior SDE-developer</li>
               </ul>
-            </span>
-          </div>
-          <div className="flex gap-10 bg-slate-950 bg-opacity-45 mt-4 rounded-lg  p-4 items-center">
-            <FaAmazon color="#FF9900" size={50} />
-            <span className="text-white">
-              <h2 className="leading-tight">Software Engineer, Google</h2>
-              <p className="text-sm leading-tight font-thin">
-                Sept 2023 - Present
-              </p>
-              <ul className="text-sm p-2">
-                <li>- Work as software developer.</li>
-                <li>- Senior SDE-developer</li>
-              </ul>
-            </span>
-          </div>
+            </span> */}
+          {/* </div> */} 
         </div>
       </div>
     </div>
