@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { RiCloseLine, RiMenu2Line } from "@remixicon/react";
+import { motion } from "framer-motion";
 
 const Navbar = () => {
   const [menu, openMenu] = useState(false);
   const [showMenu, setShowMenu] = useState(true);
   const [scrolled, setScrolled] = useState(false);
   
-  // Add scroll event listener
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 20) {
@@ -29,7 +29,25 @@ const Navbar = () => {
         transition-all duration-300
       `}
     >
-      <span className="text-xl font-bold tracking-wide">Portfolio</span>
+      {/* Simple elegant logo */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5 }}
+        className="group flex items-center"
+        whileHover={{ scale: 1.03 }}
+      >
+        <div className="flex items-center">
+          {/* Initial with dot accent */}
+          <div className="relative mr-2">
+            <span className="text-2xl font-bold italic text-indigo-200">S</span>
+            <span className="absolute bottom-0.5 text-indigo-300 text-3xl">.</span>
+          </div>
+          
+          {/* Name with elegant styling */}
+          <span className="text-xl underline italic tracking-wide text-gray-500">Meena</span>
+        </div>
+      </motion.div>
 
       <ul
         className={`${
