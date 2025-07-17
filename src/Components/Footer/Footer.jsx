@@ -3,6 +3,7 @@ import { MdOutlineEmail, MdSend, MdDone } from "react-icons/md";
 import { CiLinkedin } from "react-icons/ci";
 import { FaGithub } from "react-icons/fa";
 import { motion } from "framer-motion";
+import emailjs from '@emailjs/browser';
 
 const Footer = () => {
   const [formData, setFormData] = useState({
@@ -26,19 +27,45 @@ const Footer = () => {
     e.preventDefault();
     setFormStatus({ isSubmitting: true, isSubmitted: false, error: null });
     
-    // Simulate form submission
-    setTimeout(() => {
-      console.log("Form submitted:", formData);
-      setFormStatus({ isSubmitting: false, isSubmitted: true, error: null });
-      
-      // Reset form after submission
-      setFormData({ name: "", email: "", message: "" });
-      
-      // Reset success message after 3 seconds
-      setTimeout(() => {
-        setFormStatus(prev => ({ ...prev, isSubmitted: false }));
-      }, 3000);
-    }, 1000);
+    // EmailJS configuration
+    const serviceID = 'service_cvoo9l9';
+    const templateID = 'template_n97g58l';
+    const publicKey = 'f_6wUXV27BPk20TnH';
+    
+    // Template parameters that match your EmailJS template
+    const templateParams = {
+      from_name: formData.name,
+      from_email: formData.email,
+      message: formData.message,
+      to_name: 'Sanjana', // Your name
+    };
+    
+    emailjs.send(serviceID, templateID, templateParams, publicKey)
+      .then((response) => {
+        console.log('Email sent successfully:', response);
+        setFormStatus({ isSubmitting: false, isSubmitted: true, error: null });
+        
+        // Reset form after successful submission
+        setFormData({ name: "", email: "", message: "" });
+        
+        // Reset success message after 3 seconds
+        setTimeout(() => {
+          setFormStatus(prev => ({ ...prev, isSubmitted: false }));
+        }, 3000);
+      })
+      .catch((error) => {
+        console.error('Email sending failed:', error);
+        setFormStatus({ 
+          isSubmitting: false, 
+          isSubmitted: false, 
+          error: 'Failed to send message. Please try again.' 
+        });
+        
+        // Reset error message after 5 seconds
+        setTimeout(() => {
+          setFormStatus(prev => ({ ...prev, error: null }));
+        }, 5000);
+      });
   };
 
   return (
@@ -79,6 +106,12 @@ const Footer = () => {
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-4">
+                {formStatus.error && (
+                  <div className="bg-red-500/20 p-4 rounded-lg text-red-300 text-sm">
+                    {formStatus.error}
+                  </div>
+                )}
+                
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-1">
                     Name
@@ -130,7 +163,7 @@ const Footer = () => {
                 <button
                   type="submit"
                   disabled={formStatus.isSubmitting}
-                  className="w-full flex justify-center items-center gap-2 px-6 py-3 bg-indigo-600 hover:bg-indigo-700 rounded-lg font-semibold transition-colors duration-300"
+                  className="w-full flex justify-center items-center gap-2 px-6 py-3 bg-indigo-600 hover:bg-indigo-700 disabled:bg-indigo-800 disabled:cursor-not-allowed rounded-lg font-semibold transition-colors duration-300"
                 >
                   {formStatus.isSubmitting ? (
                     <>Sending...</>
