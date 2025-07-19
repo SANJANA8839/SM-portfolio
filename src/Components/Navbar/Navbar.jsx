@@ -29,24 +29,20 @@ const Navbar = () => {
         transition-all duration-300
       `}
     >
-      {/* Simple elegant logo */}
+      {/* Animated and modern logo */}
       <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
+        initial={{ opacity: 0, scale: 0.5 }}
+        animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.5 }}
         className="group flex items-center"
-        whileHover={{ scale: 1.03 }}
       >
-        <div className="flex items-center">
-          {/* Initial with dot accent */}
-          <div className="relative mr-2">
-            <span className="text-2xl font-bold italic text-indigo-200">S</span>
-            <span className="absolute bottom-0.5 text-indigo-300 text-3xl">.</span>
-          </div>
-          
-          {/* Name with elegant styling */}
-          <span className="text-xl underline italic tracking-wide text-gray-500">Meena</span>
-        </div>
+        <motion.div 
+          className="w-12 h-12 bg-gradient-to-r from-purple-600 to-indigo-600 rounded-full flex items-center justify-center"
+          whileHover={{ rotate: 360, scale: 1.1 }}
+          transition={{ duration: 0.6 }}
+        >
+          <span className="text-xl font-bold text-white">SM</span>
+        </motion.div>
       </motion.div>
 
       <ul
