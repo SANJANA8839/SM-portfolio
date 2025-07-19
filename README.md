@@ -1,7 +1,7 @@
 # ✨ Portfolio Website
 
 <div align="center">
-  <img src="./src/assets/7358602-removebg-preview.png" alt="Portfolio Logo" width="120" />
+  <!-- <img src="./src/assets/7358602-removebg-preview.png" alt="Portfolio Logo" width="120" /> -->
   <h3>Modern, Interactive Personal Portfolio</h3>
   <p>An elegant, responsive portfolio website built with React, Tailwind CSS, and Framer Motion</p>
   
@@ -16,7 +16,6 @@
 
 Visit the live portfolio: [https://ppportfoliooo.netlify.app/](https://ppportfoliooo.netlify.app/)
 
-![Portfolio Preview](https://via.placeholder.com/800x400?text=Portfolio+Preview)
 
 ## �️ Tech Stack
 
