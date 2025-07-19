@@ -2,7 +2,8 @@ import React, { useRef, useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion"; 
 import avatarImg from "../../assets/7358602-removebg-preview.png";
 import TextChange from "../TextChange";
-import { FaDownload, FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
+import TerminalSimulator from "../TerminalSimulator/TerminalSimulator";
+import { FaDownload, FaGithub, FaLinkedin, FaTwitter, FaTerminal } from "react-icons/fa";
 import resumePDF from "/public/Resume.pdf" 
 
 const Home = () => {
@@ -29,6 +30,9 @@ const Home = () => {
   
   // Particle effect for decoration - similar to footer
   const particles = Array.from({ length: 25 }, (_, i) => i);
+  
+  // Terminal state
+  const [isTerminalOpen, setIsTerminalOpen] = useState(false);
   
   // Floating animation for particles
   useEffect(() => {
@@ -133,6 +137,17 @@ const Home = () => {
             >
               Download Resume <FaDownload className="ml-1" />
             </motion.a>
+
+            {/* Terminal Button - Unique Feature */}
+            <motion.button
+              onClick={() => setIsTerminalOpen(true)}
+              className="flex items-center gap-2 px-6 py-3 text-white bg-gradient-to-r from-green-600 to-teal-700 hover:from-green-700 hover:to-teal-800 rounded-full font-semibold shadow-lg shadow-green-600/30 transition-all duration-300 group"
+              whileHover={{ scale: 1.05, boxShadow: "0 10px 25px -5px rgba(16, 185, 129, 0.5)" }}
+              whileTap={{ scale: 0.98 }}
+            >
+              <FaTerminal className="group-hover:animate-pulse" />
+              Explore Terminal
+            </motion.button>
             
             <div className="flex items-center gap-5 ml-2">
               {[
@@ -171,6 +186,17 @@ const Home = () => {
             <div className="flex items-center">
               <div className="h-px bg-gradient-to-r from-transparent via-indigo-500 to-transparent w-24 mr-3"></div>
               <p className="text-indigo-300 font-medium">Scroll down to explore</p>
+            </div>
+          </motion.div>
+
+          {/* Terminal hint */}
+          <motion.div 
+            variants={itemVariants}
+            className="mt-4 md:hidden"
+          >
+            <div className="flex items-center text-green-400 text-sm">
+              <FaTerminal className="mr-2 animate-pulse" />
+              <p>Try the terminal above for an interactive experience!</p>
             </div>
           </motion.div>
         </motion.div>
@@ -216,6 +242,45 @@ const Home = () => {
           </div>
         </motion.div>
       </div>
+
+      {/* Floating Terminal Button */}
+      <motion.button
+        onClick={() => setIsTerminalOpen(true)}
+        className="fixed bottom-8 right-8 w-14 h-14 bg-gradient-to-r from-green-600 to-teal-700 hover:from-green-700 hover:to-teal-800 rounded-full shadow-lg shadow-green-600/30 flex items-center justify-center z-40 group"
+        whileHover={{ 
+          scale: 1.1, 
+          boxShadow: "0 15px 35px -5px rgba(16, 185, 129, 0.6)" 
+        }}
+        whileTap={{ scale: 0.95 }}
+        initial={{ y: 100, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ delay: 2, duration: 0.6, type: "spring" }}
+      >
+        <FaTerminal className="text-white text-lg group-hover:animate-pulse" />
+        
+        {/* Tooltip */}
+        <motion.div
+          className="absolute right-16 bg-gray-900 text-white px-3 py-1 rounded-lg text-sm whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"
+          initial={{ x: 10, opacity: 0 }}
+          whileHover={{ x: 0, opacity: 1 }}
+        >
+          Open Interactive Terminal
+          <div className="absolute top-1/2 -right-1 transform -translate-y-1/2 w-2 h-2 bg-gray-900 rotate-45"></div>
+        </motion.div>
+        
+        {/* Pulse animation */}
+        <motion.div
+          className="absolute inset-0 rounded-full bg-green-400/20"
+          animate={{ scale: [1, 1.5, 1], opacity: [0.5, 0, 0.5] }}
+          transition={{ duration: 2, repeat: Infinity }}
+        />
+      </motion.button>
+
+      {/* Terminal Simulator */}
+      <TerminalSimulator 
+        isOpen={isTerminalOpen} 
+        onClose={() => setIsTerminalOpen(false)} 
+      />
     </div>
   );
 };
