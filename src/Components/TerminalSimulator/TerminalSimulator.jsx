@@ -32,8 +32,8 @@ const TerminalSimulator = ({ isOpen, onClose }) => {
       execute: () => [
         '👋 Hello! I\'m Sanjana Meena',
         '',
-        '🎯 Full Stack Developer passionate about creating',
-        '   digital experiences that matter.',
+        '🎯 Full Stack Developer passionate about',
+        '   creating digital experiences that matter.',
         '',
         '🚀 I specialize in:',
         '   • React & Modern JavaScript',
@@ -72,12 +72,12 @@ const TerminalSimulator = ({ isOpen, onClose }) => {
         '   → This very website you\'re exploring!',
         '   → Tech: React, Tailwind, Framer Motion',
         '',
-        '2. Bakery shop system',
-        '   → online bakery shop experience',
+        '2. Bakery Shop System',
+        '   → Online bakery shop experience',
         '   → Tech: HTML, CSS, JavaScript',
         '',
-        '3. online banking system',
-        '   → console based banking system',
+        '3. Online Banking System',
+        '   → Console based banking system',
         '   → Tech: C++, console based',
         '',
         'Visit the Projects section to see more!'
@@ -224,6 +224,13 @@ const TerminalSimulator = ({ isOpen, onClose }) => {
     }
   };
 
+  const handleTerminalClick = () => {
+    // Focus input when terminal content is clicked (especially useful on mobile)
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
+  };
+
   const executeCommand = async (cmd) => {
     const trimmedCmd = cmd.trim().toLowerCase();
     
@@ -234,8 +241,9 @@ const TerminalSimulator = ({ isOpen, onClose }) => {
     
     setIsTyping(true);
     
-    // Simulate typing delay
-    await new Promise(resolve => setTimeout(resolve, 300));
+    // Reduced delay on mobile for better performance
+    const delay = window.innerWidth < 768 ? 150 : 300;
+    await new Promise(resolve => setTimeout(resolve, delay));
     
     if (commands[trimmedCmd]) {
       const result = commands[trimmedCmd].execute();
@@ -265,7 +273,10 @@ const TerminalSimulator = ({ isOpen, onClose }) => {
 
   useEffect(() => {
     if (isOpen && inputRef.current) {
-      inputRef.current.focus();
+      // Small delay to ensure proper focus on mobile
+      setTimeout(() => {
+        inputRef.current.focus();
+      }, 100);
     }
   }, [isOpen]);
 
@@ -284,11 +295,10 @@ const TerminalSimulator = ({ isOpen, onClose }) => {
           content: [
             '🚀 Welcome to Sanjana\'s Interactive Terminal!',
             '',
-            '✨ This is a fully functional command-line interface',
-            '   where you can explore my portfolio in a unique way.',
+            '✨ Explore my portfolio through commands',
             '',
             '💡 Type "help" to see available commands.',
-            '🎯 Try "about", "skills", or "projects" to get started!',
+            '🎯 Try "about", "skills", or "projects"!',
             ''
           ] 
         }
@@ -304,7 +314,7 @@ const TerminalSimulator = ({ isOpen, onClose }) => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4"
+        className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-2 sm:p-4"
         onClick={onClose}
       >
         <motion.div
@@ -312,19 +322,19 @@ const TerminalSimulator = ({ isOpen, onClose }) => {
           animate={{ scale: 1, y: 0 }}
           exit={{ scale: 0.8, y: 50 }}
           onClick={(e) => e.stopPropagation()}
-          className="bg-gray-900 rounded-lg border border-gray-700 shadow-2xl w-full max-w-4xl h-[80vh] flex flex-col overflow-hidden"
+          className="bg-gray-900 rounded-lg border border-gray-700 shadow-2xl w-full max-w-4xl h-[85vh] sm:h-[80vh] flex flex-col overflow-hidden"
         >
           {/* Terminal Header */}
-          <div className="bg-gray-800 px-4 py-2 flex items-center justify-between border-b border-gray-700">
-            <div className="flex items-center gap-2">
-              <FaTerminal className="text-green-400" />
-              <span className="text-green-400 font-mono text-sm">sanjana@portfolio:~$</span>
+          <div className="bg-gray-800 px-2 sm:px-4 py-2 flex items-center justify-between border-b border-gray-700">
+            <div className="flex items-center gap-1 sm:gap-2">
+              <FaTerminal className="text-green-400 text-sm sm:text-base" />
+              <span className="text-green-400 font-mono text-xs sm:text-sm">sanjana@portfolio:~$</span>
             </div>
-            <div className="flex items-center gap-2">
-              <FaMinusSquare className="text-yellow-400 cursor-pointer hover:text-yellow-300" />
-              <FaExpandArrowsAlt className="text-green-400 cursor-pointer hover:text-green-300" />
+            <div className="flex items-center gap-1 sm:gap-2">
+              <FaMinusSquare className="text-yellow-400 cursor-pointer hover:text-yellow-300 text-sm sm:text-base hidden sm:block" />
+              <FaExpandArrowsAlt className="text-green-400 cursor-pointer hover:text-green-300 text-sm sm:text-base hidden sm:block" />
               <FaTimes 
-                className="text-red-400 cursor-pointer hover:text-red-300" 
+                className="text-red-400 cursor-pointer hover:text-red-300 text-sm sm:text-base" 
                 onClick={onClose}
               />
             </div>
@@ -333,14 +343,18 @@ const TerminalSimulator = ({ isOpen, onClose }) => {
           {/* Terminal Content */}
           <div 
             ref={terminalRef}
-            className="flex-1 bg-black p-4 overflow-y-auto font-mono text-sm"
+            className="flex-1 bg-black p-2 sm:p-4 overflow-y-auto font-mono text-xs sm:text-sm cursor-text"
+            onClick={handleTerminalClick}
           >
             {history.map((entry, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, x: -10 }}
                 animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: index * 0.05 }}
+                transition={{ 
+                  delay: window.innerWidth < 768 ? index * 0.02 : index * 0.05,
+                  duration: 0.3 
+                }}
                 className="mb-2"
               >
                 {entry.type === 'command' && (
@@ -377,22 +391,26 @@ const TerminalSimulator = ({ isOpen, onClose }) => {
           </div>
 
           {/* Terminal Input */}
-          <div className="bg-gray-900 px-4 py-2 border-t border-gray-700">
+          <div className="bg-gray-900 px-2 sm:px-4 py-2 border-t border-gray-700">
             <form onSubmit={handleSubmit} className="flex items-center">
-              <span className="text-green-400 mr-2 font-mono">{currentDirectory} $</span>
+              <span className="text-green-400 mr-1 sm:mr-2 font-mono text-xs sm:text-sm whitespace-nowrap">{currentDirectory} $</span>
               <input
                 ref={inputRef}
                 type="text"
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
-                className="flex-1 bg-transparent text-gray-300 outline-none font-mono"
+                className="flex-1 bg-transparent text-gray-300 outline-none font-mono text-xs sm:text-sm min-w-0"
                 placeholder="Type a command..."
                 disabled={isTyping}
+                autoComplete="off"
+                autoCorrect="off"
+                autoCapitalize="off"
+                spellCheck="false"
               />
               <motion.div
                 animate={{ opacity: [1, 0, 1] }}
                 transition={{ duration: 1, repeat: Infinity }}
-                className="w-2 h-4 bg-green-400 ml-1"
+                className="w-1 sm:w-2 h-3 sm:h-4 bg-green-400 ml-1 flex-shrink-0"
               />
             </form>
           </div>

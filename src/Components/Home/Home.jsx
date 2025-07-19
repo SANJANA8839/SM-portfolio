@@ -28,8 +28,8 @@ const Home = () => {
     },
   };
   
-  // Particle effect for decoration - similar to footer
-  const particles = Array.from({ length: 25 }, (_, i) => i);
+  // Particle effect for decoration - reduced for mobile performance
+  const particles = Array.from({ length: window.innerWidth < 768 ? 8 : 15 }, (_, i) => i);
   
   // Terminal state
   const [isTerminalOpen, setIsTerminalOpen] = useState(false);
@@ -42,60 +42,58 @@ const Home = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-slate-800 to-gray-900 overflow-hidden">
-      {/* Animated background elements */}
+      {/* Animated background elements - optimized for mobile */}
       <div className="fixed inset-0 -z-10">
-        <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-indigo-600/20 rounded-full blur-3xl animate-pulse-slow"></div>
-        <div className="absolute bottom-1/3 right-1/3 w-72 h-72 bg-purple-600/10 rounded-full blur-3xl animate-pulse-slow animation-delay-2000"></div>
-        <div className="absolute bottom-1/4 left-1/3 w-48 h-48 bg-blue-600/10 rounded-full blur-3xl animate-pulse-slow animation-delay-1000"></div>
-        <div className="absolute top-20 right-60 w-24 h-24 bg-teal-600/20 rounded-full blur-xl animate-float"></div>
+        <div className="absolute top-1/4 left-1/4 w-32 sm:w-64 h-32 sm:h-64 bg-indigo-600/10 sm:bg-indigo-600/20 rounded-full blur-2xl sm:blur-3xl animate-pulse-slow"></div>
+        <div className="absolute bottom-1/3 right-1/3 w-36 sm:w-72 h-36 sm:h-72 bg-purple-600/5 sm:bg-purple-600/10 rounded-full blur-2xl sm:blur-3xl animate-pulse-slow animation-delay-2000"></div>
+        <div className="absolute bottom-1/4 left-1/3 w-24 sm:w-48 h-24 sm:h-48 bg-blue-600/5 sm:bg-blue-600/10 rounded-full blur-xl sm:blur-3xl animate-pulse-slow animation-delay-1000"></div>
+        <div className="absolute top-20 right-60 w-12 sm:w-24 h-12 sm:h-24 bg-teal-600/10 sm:bg-teal-600/20 rounded-full blur-lg sm:blur-xl animate-float"></div>
       </div>
       
-      {/* Decorative particles - similar to footer */}
-      <AnimatePresence>
-        {particles.map((_, index) => (
-          <motion.div
-            key={index}
-            className="fixed w-1 h-1 rounded-full bg-indigo-500/30 z-0"
-            animate={{
-              x: [Math.random() * 100, Math.random() * window.innerWidth],
-              y: [Math.random() * 100, Math.random() * window.innerHeight],
-              opacity: [0.2, 0.8, 0.2],
-              scale: [0.8, 1.2, 0.8]
-            }}
-            transition={{
-              duration: Math.random() * 10 + 10,
-              repeat: Infinity,
-              ease: "easeInOut"
-            }}
-            style={{
-              top: `${Math.random() * 100}%`,
-              left: `${Math.random() * 100}%`,
-            }}
-          />
-        ))}
-      </AnimatePresence>
+      {/* Decorative particles - optimized for performance */}
+      {particles.map((_, index) => (
+        <motion.div
+          key={index}
+          className="fixed w-1 h-1 rounded-full bg-indigo-500/20 z-0 hidden sm:block"
+          animate={{
+            x: [0, 100, 0],
+            y: [0, -100, 0],
+            opacity: [0.1, 0.5, 0.1],
+          }}
+          transition={{
+            duration: Math.random() * 8 + 6,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: index * 0.2
+          }}
+          style={{
+            top: `${Math.random() * 80 + 10}%`,
+            left: `${Math.random() * 80 + 10}%`,
+          }}
+        />
+      ))}
       
-      {/* Animated gradient orbs */}
+      {/* Animated gradient orbs - reduced for mobile */}
       <motion.div 
-        className="fixed top-1/3 left-1/5 w-72 h-72 bg-indigo-600/10 rounded-full blur-3xl -z-10"
+        className="fixed top-1/3 left-1/5 w-36 sm:w-72 h-36 sm:h-72 bg-indigo-600/5 sm:bg-indigo-600/10 rounded-full blur-2xl sm:blur-3xl -z-10 hidden sm:block"
         animate={{
-          scale: [1, 1.2, 1],
-          opacity: [0.5, 0.8, 0.5],
+          scale: [1, 1.1, 1],
+          opacity: [0.3, 0.6, 0.3],
         }}
         transition={{
-          duration: 8,
+          duration: 12,
           repeat: Infinity,
           repeatType: "reverse"
         }}
       />
       <motion.div 
-        className="fixed bottom-1/4 right-1/4 w-80 h-80 bg-purple-600/10 rounded-full blur-3xl -z-10"
+        className="fixed bottom-1/4 right-1/4 w-40 sm:w-80 h-40 sm:h-80 bg-purple-600/5 sm:bg-purple-600/10 rounded-full blur-2xl sm:blur-3xl -z-10 hidden sm:block"
         animate={{
-          scale: [1, 1.3, 1],
-          opacity: [0.5, 0.7, 0.5],
+          scale: [1, 1.2, 1],
+          opacity: [0.3, 0.5, 0.3],
         }}
         transition={{
-          duration: 10,
+          duration: 15,
           repeat: Infinity,
           repeatType: "reverse"
         }}
