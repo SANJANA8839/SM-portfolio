@@ -5,7 +5,7 @@
   <h3>Modern, Interactive Personal Portfolio</h3>
   <p>An elegant, responsive portfolio website built with React, Tailwind CSS, and Framer Motion</p>
   
-  <a href="https://ppportfoliooo.netlify.app/" target="_blank">
+  <a href="https://posrtfolio-sanjana.netlify.app/" target="_blank">
     <img src="https://img.shields.io/badge/View_Live-Portfolio-5D3FD3" alt="Live Demo" />
   </a>
 </div>
@@ -14,7 +14,7 @@
 
 ## 🚀 Live Demo
 
-Visit the live portfolio: [https://ppportfoliooo.netlify.app/](https://ppportfoliooo.netlify.app/)
+Visit the live portfolio: [https://posrtfolio-sanjana.netlify.app/](https://posrtfolio-sanjana.netlify.app/)
 
 
 ## �️ Tech Stack
