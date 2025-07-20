@@ -19,15 +19,6 @@ const Footer = () => {
   });
 
   const formRef = useRef(null);
-  
-  // Particle effect for decoration - reduced for mobile performance
-  const particles = Array.from({ length: window.innerWidth < 768 ? 6 : 12 }, (_, i) => i);
-  
-  // Floating animation for particles
-  useEffect(() => {
-    // This is only for the particles effect initialization
-    // No actual DOM manipulation needed here as we're using framer-motion
-  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -84,28 +75,6 @@ const Footer = () => {
       id="Footer"
       className="bg-gradient-to-b from-slate-900 via-indigo-950 to-slate-900 text-white py-12 pt-20 md:pt-28 px-4 md:px-16 relative overflow-hidden"
     >
-      {/* Decorative particles - optimized for performance */}
-      {particles.map((_, index) => (
-        <motion.div
-          key={index}
-          className="absolute w-1 h-1 rounded-full bg-indigo-500/20 hidden sm:block"
-          animate={{
-            x: [0, 80, 0],
-            y: [0, -80, 0],
-            opacity: [0.1, 0.4, 0.1],
-          }}
-          transition={{
-            duration: Math.random() * 6 + 4,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: index * 0.3
-          }}
-          style={{
-            top: `${Math.random() * 70 + 15}%`,
-            left: `${Math.random() * 70 + 15}%`,
-          }}
-        />
-      ))}
       
       {/* Background gradient orbs */}
       <motion.div 

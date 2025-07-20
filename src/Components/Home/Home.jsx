@@ -28,20 +28,11 @@ const Home = () => {
     },
   };
   
-  // Particle effect for decoration - reduced for mobile performance
-  const particles = Array.from({ length: window.innerWidth < 768 ? 8 : 15 }, (_, i) => i);
-  
   // Terminal state
   const [isTerminalOpen, setIsTerminalOpen] = useState(false);
-  
-  // Floating animation for particles
-  useEffect(() => {
-    // This is only for the particles effect initialization
-    // No actual DOM manipulation needed here as we're using framer-motion
-  }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-slate-800 to-gray-900 overflow-hidden">
+    <div id="Home" className="min-h-screen bg-gradient-to-br from-gray-900 via-slate-800 to-gray-900">
       {/* Animated background elements - optimized for mobile */}
       <div className="fixed inset-0 -z-10">
         <div className="absolute top-1/4 left-1/4 w-32 sm:w-64 h-32 sm:h-64 bg-indigo-600/10 sm:bg-indigo-600/20 rounded-full blur-2xl sm:blur-3xl animate-pulse-slow"></div>
@@ -49,29 +40,6 @@ const Home = () => {
         <div className="absolute bottom-1/4 left-1/3 w-24 sm:w-48 h-24 sm:h-48 bg-blue-600/5 sm:bg-blue-600/10 rounded-full blur-xl sm:blur-3xl animate-pulse-slow animation-delay-1000"></div>
         <div className="absolute top-20 right-60 w-12 sm:w-24 h-12 sm:h-24 bg-teal-600/10 sm:bg-teal-600/20 rounded-full blur-lg sm:blur-xl animate-float"></div>
       </div>
-      
-      {/* Decorative particles - optimized for performance */}
-      {particles.map((_, index) => (
-        <motion.div
-          key={index}
-          className="fixed w-1 h-1 rounded-full bg-indigo-500/20 z-0 hidden sm:block"
-          animate={{
-            x: [0, 100, 0],
-            y: [0, -100, 0],
-            opacity: [0.1, 0.5, 0.1],
-          }}
-          transition={{
-            duration: Math.random() * 8 + 6,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: index * 0.2
-          }}
-          style={{
-            top: `${Math.random() * 80 + 10}%`,
-            left: `${Math.random() * 80 + 10}%`,
-          }}
-        />
-      ))}
       
       {/* Animated gradient orbs - reduced for mobile */}
       <motion.div 
@@ -211,7 +179,7 @@ const Home = () => {
           <div className="absolute -bottom-5 -right-5 w-32 h-32 border border-purple-500/20 rounded-full"></div>
           
           <div className="relative">
-            {/* Enhanced glow effect */}
+           
             <div className="absolute -inset-4 rounded-full bg-gradient-to-r from-indigo-500/20 via-purple-500/20 to-pink-500/20 blur-2xl animate-pulse"></div>
             
             {/* Image container with enhanced styling */}
@@ -240,39 +208,6 @@ const Home = () => {
           </div>
         </motion.div>
       </div>
-
-      {/* Floating Terminal Button */}
-      <motion.button
-        onClick={() => setIsTerminalOpen(true)}
-        className="fixed bottom-8 right-8 w-14 h-14 bg-gradient-to-r from-green-600 to-teal-700 hover:from-green-700 hover:to-teal-800 rounded-full shadow-lg shadow-green-600/30 flex items-center justify-center z-40 group"
-        whileHover={{ 
-          scale: 1.1, 
-          boxShadow: "0 15px 35px -5px rgba(16, 185, 129, 0.6)" 
-        }}
-        whileTap={{ scale: 0.95 }}
-        initial={{ y: 100, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ delay: 2, duration: 0.6, type: "spring" }}
-      >
-        <FaTerminal className="text-white text-lg group-hover:animate-pulse" />
-        
-        {/* Tooltip */}
-        <motion.div
-          className="absolute right-16 bg-gray-900 text-white px-3 py-1 rounded-lg text-sm whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"
-          initial={{ x: 10, opacity: 0 }}
-          whileHover={{ x: 0, opacity: 1 }}
-        >
-          Open Interactive Terminal
-          <div className="absolute top-1/2 -right-1 transform -translate-y-1/2 w-2 h-2 bg-gray-900 rotate-45"></div>
-        </motion.div>
-        
-        {/* Pulse animation */}
-        <motion.div
-          className="absolute inset-0 rounded-full bg-green-400/20"
-          animate={{ scale: [1, 1.5, 1], opacity: [0.5, 0, 0.5] }}
-          transition={{ duration: 2, repeat: Infinity }}
-        />
-      </motion.button>
 
       {/* Terminal Simulator */}
       <TerminalSimulator 

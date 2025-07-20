@@ -8,10 +8,7 @@ html {
 }
 
 /* Performance optimizations for mobile */
-* {
-  -webkit-transform: translateZ(0);
-  transform: translateZ(0);
-}
+/* Removed global transform that was creating stacking contexts */
 
 /* Reduce animations on mobile for better performance */
 @media (max-width: 768px) {
@@ -87,6 +84,32 @@ html {
 body {
   @apply bg-gray-900 text-white font-sans;
   overflow-x: hidden;
+  /* Ensure body doesn't create stacking context */
+  position: relative;
+}
+
+/* Force navbar to stay fixed */
+nav[style*="position: fixed"], 
+#main-navbar,
+.navbar-fixed {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  width: 100% !important;
+  z-index: 9999 !important;
+  background: rgba(17, 24, 39, 0.9) !important;
+  backdrop-filter: blur(8px) !important;
+}
+
+/* Additional class to ensure fixed positioning */
+.navbar-fixed {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  width: 100% !important;
+  z-index: 9999 !important;
 }
 
 * {

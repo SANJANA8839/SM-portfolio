@@ -7,14 +7,16 @@ import Projects from "./Components/Projects/Projects";
 
 function App() {
   return (
-    <div className="bg-[#171d32] h-auto w-full overflow-hidden">
+    <>
       <Navbar />
-      <Home />
-      <About />
-      <Experience />
-      <Projects />
-      <Footer />
-    </div>
+      <div className="bg-[#171d32] h-auto w-full">
+        <Home />
+        <About />
+        <Experience />
+        <Projects />
+        <Footer />
+      </div>
+    </>
   );
 }
 

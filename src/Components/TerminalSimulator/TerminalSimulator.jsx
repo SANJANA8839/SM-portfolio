@@ -314,18 +314,20 @@ const TerminalSimulator = ({ isOpen, onClose }) => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-2 sm:p-4"
+        className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-[60] p-3 sm:p-4"
         onClick={onClose}
+        style={{ paddingTop: '80px' }}
       >
         <motion.div
           initial={{ scale: 0.8, y: 50 }}
           animate={{ scale: 1, y: 0 }}
           exit={{ scale: 0.8, y: 50 }}
           onClick={(e) => e.stopPropagation()}
-          className="bg-gray-900 rounded-lg border border-gray-700 shadow-2xl w-full max-w-4xl h-[85vh] sm:h-[80vh] flex flex-col overflow-hidden"
+          className="bg-gray-900 rounded-lg border border-gray-700 shadow-2xl w-full max-w-4xl h-[70vh] sm:h-[75vh] md:h-[80vh] flex flex-col overflow-hidden"
+          style={{ maxHeight: 'calc(100vh - 160px)' }}
         >
           {/* Terminal Header */}
-          <div className="bg-gray-800 px-2 sm:px-4 py-2 flex items-center justify-between border-b border-gray-700">
+          <div className="bg-gray-800 px-2 sm:px-4 py-2 flex items-center justify-between border-b border-gray-700 flex-shrink-0">
             <div className="flex items-center gap-1 sm:gap-2">
               <FaTerminal className="text-green-400 text-sm sm:text-base" />
               <span className="text-green-400 font-mono text-xs sm:text-sm">sanjana@portfolio:~$</span>
@@ -343,7 +345,7 @@ const TerminalSimulator = ({ isOpen, onClose }) => {
           {/* Terminal Content */}
           <div 
             ref={terminalRef}
-            className="flex-1 bg-black p-2 sm:p-4 overflow-y-auto font-mono text-xs sm:text-sm cursor-text"
+            className="flex-1 bg-black p-2 sm:p-4 overflow-y-auto font-mono text-xs sm:text-sm cursor-text min-h-0"
             onClick={handleTerminalClick}
           >
             {history.map((entry, index) => (
@@ -391,7 +393,7 @@ const TerminalSimulator = ({ isOpen, onClose }) => {
           </div>
 
           {/* Terminal Input */}
-          <div className="bg-gray-900 px-2 sm:px-4 py-2 border-t border-gray-700">
+          <div className="bg-gray-900 px-2 sm:px-4 py-2 border-t border-gray-700 flex-shrink-0">
             <form onSubmit={handleSubmit} className="flex items-center">
               <span className="text-green-400 mr-1 sm:mr-2 font-mono text-xs sm:text-sm whitespace-nowrap">{currentDirectory} $</span>
               <input
